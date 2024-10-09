@@ -48,7 +48,31 @@ public class LinkedList {
     }
 
     public void remove(String value){
-
+        Node previous = null;
+        Node current = first;
+        for (int i = 0; i < getLength(); i++) {
+            if (current.getValue().equalsIgnoreCase(value)){
+                if (length == 1){
+                    first = null;
+                    last = null;
+                }
+                else if (current == first){
+                    first = current.getNext();
+                    current.setNext(null);
+                } else if (current == last) {
+                    last = previous;
+                    previous.setNext(null);
+                }
+                else {
+                    previous.setNext(current.getNext());
+                    current = null;
+                }
+                length--;
+                break;
+            }
+            previous = current;
+            current = current.getNext();
+        }
     }
 
     public Node get(int position){

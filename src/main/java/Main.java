@@ -1,4 +1,5 @@
 import list.LinkedList;
+import list.Node;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,8 +11,15 @@ public class Main {
         System.out.println("Tamanho: " + list.getLength());
         System.out.println("Primeiro: " + list.getFirst().getValue());
         System.out.println("Último: " + list.getLast().getValue());
-        System.out.println(list.get(0).getValue());
-        System.out.println(list.get(1).getValue());
-        System.out.println(list.get(2).getValue());
+        for (int i = 0; i < list.getLength(); i++) {
+            System.out.println(list.get(i).getValue());
+        }
+        // remover
+
+        list.remove("A");
+        System.out.println("Removeu");
+        for (int i = 0; i < list.getLength(); i++) {
+            System.out.println(list.get(i).getValue());
+        }
     }
 }
