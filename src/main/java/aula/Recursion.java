@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Recursividade {
+public class Recursion {
 
     public int findTwo(List<Integer> list){
         if (list.isEmpty()) {
@@ -24,9 +24,9 @@ public class Recursividade {
 
 
     public static void main(String[] args) {
-        List<Integer> list1 = new ArrayList<>(Arrays.asList(1,2,3,2));
-        Recursividade recursividade = new Recursividade();
-        System.out.println(recursividade.findTwo(list1));
+        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,2));
+        Recursion recursividade = new Recursion();
+        System.out.println(recursividade.findTwo(list));
     }
 }
 
