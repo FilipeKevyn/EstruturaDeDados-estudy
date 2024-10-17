@@ -47,6 +47,33 @@ public class Recursion {
         }
     }
 
+    public boolean findNumber(List<Integer> list, int num){
+        if (list.isEmpty()){
+            return false;
+        }
+        else {
+            if (list.get(0) == num){
+                return true;
+            }
+            else {
+                list.remove(0);
+                return findNumber(list, num);
+            }
+        }
+    }
+
+    // Iterator
+
+    public boolean findNumberIterator(List<Integer> list, int num) {
+        for (int i = 0; i <= list.size(); i++) {
+            if (list.get(i) == num) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     public static void main(String[] args) {
         Recursion recursividade = new Recursion();
