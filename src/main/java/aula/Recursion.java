@@ -48,18 +48,15 @@ public class Recursion {
     }
 
     public boolean findNumber(List<Integer> list, int num){
-        if (list.isEmpty()){
-            return false;
-        }
-        else {
+        if (list.size() == 1){
             if (list.get(0) == num){
                 return true;
             }
-            else {
-                list.remove(0);
-                return findNumber(list, num);
-            }
+            else
+                return false;
         }
+        int t = list.size();
+        return findNumberIterator(list.subList(0,(t/2)), num) || findNumberIterator(list.subList((t/2 + 1), t), num);
     }
 
     // Iterator
@@ -77,7 +74,8 @@ public class Recursion {
 
     public static void main(String[] args) {
         Recursion recursividade = new Recursion();
-        pares(8);
+        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+        System.out.println(recursividade.findNumberIterator(list, 5));
     }
 }
 
