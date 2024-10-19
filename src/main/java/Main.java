@@ -16,7 +16,7 @@ public class Main {
         }
         // remover
 
-        list.remove("A");
+        list.remove("C");
         System.out.println("Removeu");
         for (int i = 0; i < list.getLength(); i++) {
             System.out.println(list.get(i).getValue());
