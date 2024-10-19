@@ -1,26 +1,26 @@
 package list;
 
-public class Node {
-    private String value;
-    private Node next;
+public class Node<T> {
+    private T value;
+    private Node<T> next;
 
-    public Node(String value) {
+    public Node(T value) {
         this.value = value;
     }
 
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public Node getNext() {
+    public Node<T> getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Node<T> next) {
         this.next = next;
     }
 }

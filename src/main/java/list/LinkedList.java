@@ -1,27 +1,27 @@
 package list;
 
-public class LinkedList {
-    private Node first;
-    private Node last;
+public class LinkedList<T> {
+    private Node<T> first;
+    private Node<T> last;
     private int length;
 
     public LinkedList(){
         this.length = 0;
     }
 
-    public Node getFirst() {
+    public Node<T> getFirst() {
         return first;
     }
 
-    public void setFirst(Node first) {
+    public void setFirst(Node<T> first) {
         this.first = first;
     }
 
-    public Node getLast() {
+    public Node<T> getLast() {
         return last;
     }
 
-    public void setLast(Node last) {
+    public void setLast(Node<T> last) {
         this.last = last;
     }
 
@@ -33,8 +33,8 @@ public class LinkedList {
         this.length = length;
     }
 
-    public void add(String value){
-        Node element = new Node(value);
+    public void add(T value){
+        Node<T> element = new Node<T>(value);
         if (first == null && last == null){
             first = element;
             last = element;
@@ -47,11 +47,11 @@ public class LinkedList {
 
     }
 
-    public void remove(String value){
-        Node previous = null;
-        Node current = first;
+    public void remove(T value){
+        Node<T> previous = null;
+        Node<T> current = first;
         for (int i = 0; i < getLength(); i++) {
-            if (current.getValue().equalsIgnoreCase(value)){
+            if (current == value){
                 if (length == 1){
                     first = null;
                     last = null;
@@ -75,8 +75,8 @@ public class LinkedList {
         }
     }
 
-    public Node get(int position){
-        Node current = first;
+    public Node<T> get(int position){
+        Node<T> current = first;
         for (int i = 0; i < position; i++) {
             if (current.getNext() != null){
                 current = current.getNext();
