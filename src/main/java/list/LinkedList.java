@@ -33,6 +33,10 @@ public class LinkedList<T> {
         this.length = length;
     }
 
+    public Iterator<T> getIterator(){
+        return new Iterator<>(first);
+    }
+
     public void add(T value){
         Node<T> element = new Node<T>(value);
         if (first == null && last == null){
