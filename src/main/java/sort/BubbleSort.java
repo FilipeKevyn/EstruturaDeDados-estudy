@@ -1,9 +1,9 @@
-package aula;
+package sort;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SortList {
+public class BubbleSort {
     public static void main(String[] args) {
         ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(2,3,1,5,4));
 
