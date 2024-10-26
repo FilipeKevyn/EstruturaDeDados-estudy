@@ -6,6 +6,8 @@ Este repositório foi criado para fins didáticos, com o objetivo de estudar e i
 - **Linked List**
 - **Bubble Sort**
 - **Insertion Sort**
+- **Selection Sort**
+- **Heap Sort**
 - **Binary Search**
 - *Problemas recursivos*
 
