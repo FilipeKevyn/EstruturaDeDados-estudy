@@ -55,15 +55,15 @@ public class LinkedList<T> {
         Node<T> previous = null;
         Node<T> current = first;
         for (int i = 0; i < getLength(); i++) {
-            if (current == value){
+            if (current.getValue() == value){
                 if (length == 1){
                     first = null;
                     last = null;
                 }
-                else if (current == first){
+                else if (current.getValue() == first){
                     first = current.getNext();
                     current.setNext(null);
-                } else if (current == last) {
+                } else if (current.getValue() == last) {
                     last = previous;
                     previous.setNext(null);
                 }
@@ -77,6 +77,13 @@ public class LinkedList<T> {
             previous = current;
             current = current.getNext();
         }
+    }
+
+    public void add(int position, T value){
+        Node<T> novo = new Node<>(value);
+        Node<T> next = get(position);
+
+        novo.setNext(next);
     }
 
     public Node<T> get(int position){
