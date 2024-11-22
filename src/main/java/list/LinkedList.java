@@ -37,7 +37,7 @@ public class LinkedList<T> {
         return new Iterator<>(first);
     }
 
-    public void add(T value){
+    public void addEnd(T value){
         Node<T> element = new Node<T>(value);
         if (first == null && last == null){
             first = element;
@@ -45,10 +45,25 @@ public class LinkedList<T> {
         }
         else {
              last.setNext(element);
+             element.setPrevious(last);
              last = element;
         }
         length++;
 
+    }
+
+    public void addBeginning(T value){
+        Node<T> element = new Node<T>(value);
+        if (first == null && last == null){
+            first = element;
+            last = element;
+        }
+        else {
+            element.setNext(first);
+            first.setPrevious(element);
+            setFirst(element);
+        }
+        length++;
     }
 
     public void remove(T value){
@@ -82,17 +97,21 @@ public class LinkedList<T> {
     public void add(int position, T value){
         Node<T> novo = new Node<>(value);
         Node<T> next = get(position);
-        Node<T> anterior = get(position - 1);
+        Node<T> previous = next.getPrevious();
 
         if (position == 0){
             novo.setNext(get(position));
             setFirst(novo);
         } else if (position == length - 1) {
             last.setNext(novo);
+            novo.setPrevious(last);
             setLast(novo);
+
         }else {
             novo.setNext(next);
-            anterior.setNext(novo);
+            next.setPrevious(novo);
+            previous.setNext(novo);
+            novo.setPrevious(previous);
         }
 
 
