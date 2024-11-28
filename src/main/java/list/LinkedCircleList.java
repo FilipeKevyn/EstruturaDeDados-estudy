@@ -39,10 +39,63 @@ public class LinkedCircleList<T> {
     }
 
     public void addEnd(T element){
-        Node<T> node = new Node<>(element);
-        for (int i = 1; i < length; i++) {
-
+        Node<T> newNode = new Node<>(element);
+        if (first == null && last == null){
+            first = newNode;
+            last = newNode;
         }
+        else {
+            newNode.setNext(top); // -> E -> D
+            newNode.setPrevious(last);
+            last.setNext(newNode);
+            last = newNode;
+            first.setPrevious(last);
+            last.setNext(first);
+        }
+        length++;
+    }
+
+    public void addBeginning(T element){
+        Node<T> newNode = new Node<>(element);
+        if (first == null && last == null){
+            first = newNode;
+            last = newNode;
+        }
+        else {
+            first.setPrevious(newNode);
+            newNode.setNext(first);
+            first = newNode;
+            first.setPrevious(last);
+            last.setNext(first);
+        }
+        length++;
+    }
+
+    public void add(T element, int position){
+        if (position == 0){
+            addBeginning(element);
+        } else if (position + 1 == length) {
+            addEnd(element);
+        } else {
+            Node<T> node = get(position);
+            Node<T> newNode = new Node<>(element);
+
+            newNode.setNext(node);
+            newNode.setPrevious(node.getPrevious());
+            node.setPrevious(newNode);
+        }
+    }
+    // concertar
+    public Node<T> get(int position){
+        Node<T> current = first;
+        for (int i = 0; i < position; i++) {
+            if (current.getNext() != null) {
+                current = current.getNext();
+            } else {
+                return null;
+            }
+        }
+        return current;
     }
 
 
