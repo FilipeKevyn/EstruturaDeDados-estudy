@@ -78,13 +78,15 @@ public class LinkedList<T> {
                 else if (current.getValue() == first.getValue()){
                     first = current.getNext();
                     current.setNext(null);
+                    first.setPrevious(null);
                 } else if (current.getValue() == last.getValue()) {
                     last = previous;
                     previous.setNext(null);
+                    // não precisa setar o anterior, pois nenhum Node aponta para o elemento removido
                 }
                 else {
                     previous.setNext(current.getNext());
-                    current = null;
+                    current.getNext().setPrevious(previous);
                 }
                 length--;
                 break;
