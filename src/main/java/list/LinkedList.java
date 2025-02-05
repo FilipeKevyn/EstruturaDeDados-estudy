@@ -33,10 +33,6 @@ public class LinkedList<T> {
         this.length = length;
     }
 
-    public Iterator<T> getIterator(){
-        return new Iterator<>(first);
-    }
-
     public void add(T value){
         Node<T> element = new Node<T>(value);
         if (first == null && last == null){
@@ -114,5 +110,50 @@ public class LinkedList<T> {
         return current;
     }
 
+    private class Node<T> {
+        private T value;
+        private Node<T> next;
+
+        public Node(T value) {
+            this.value = value;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<T> next) {
+            this.next = next;
+        }
+    }
+
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+        list.add("A");
+        list.add("B");
+        list.add("C");
+
+        System.out.println("Tamanho: " + list.getLength());
+        System.out.println("Primeiro: " + list.getFirst().getValue());
+        System.out.println("Último: " + list.getLast().getValue());
+        for (int i = 0; i < list.getLength(); i++) {
+            System.out.println(list.get(i).getValue());
+        }
+        // remover
+
+        list.remove(0);
+        System.out.println("Removeu");
+        for (int i = 0; i < list.getLength(); i++) {
+            System.out.println(list.get(i).getValue());
+        }
+    }
 
 }

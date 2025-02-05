@@ -1,6 +1,6 @@
 package hash;
 
-public class Aluno {
+class Aluno {
     private String nome;
     private Integer matricula;
 

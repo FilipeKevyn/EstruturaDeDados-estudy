@@ -1,70 +1,64 @@
 package hash;
 
-import list.LinkedList;
-
 public class TableHash {
-    private LinkedList<Aluno>[] tabela;
+    private Aluno[] tabela;
+    private int size;
+    private final Aluno REMOVIDO = new Aluno("REMOVIDO", -1);
 
-    public TableHash(int size) {
-        tabela = new LinkedList[size];
-        for (int i = 0; i < size; i++) {
-            tabela[i] = new LinkedList<Aluno>();
+    public TableHash(int capacidadeInicial) {
+        tabela = new Aluno[capacidadeInicial];
+        size = 0;
+    }
+    private int hash(int matricula) {
+        return matricula % tabela.length;
+    }
+
+    public void insert(int matricula, String nome) {
+        if (size >= tabela.length * 0.75) {
+            reSize();
         }
-    }
 
-    public int hash(int key){
-        return key % tabela.length;
-    }
-
-    public void insert(int key, String value){
-        int hashIndex = hash(key);
-        if (tabela[hashIndex] == null) {
-            tabela[hashIndex] = new LinkedList<Aluno>();
+        int hashIndex = hash(matricula);
+        while (tabela[hashIndex] != null && tabela[hashIndex] != REMOVIDO) {
+            hashIndex = (hashIndex + 1) % tabela.length;
         }
-        tabela[hashIndex].add(new Aluno(value, key));
+
+        tabela[hashIndex] = new Aluno(nome, matricula);
+        size++;
     }
 
-    public Aluno getValue(int key){
-        LinkedList<Aluno> alunos = tabela[hash(key)];
-        for (int i = 0; i < alunos.getLength(); i++) {
-            if (alunos.get(i).getValue().getMatricula() == key){
-                return alunos.get(i).getValue();
+    public String getValue(int matricula) {
+        int posicao = hash(matricula);
+        while (tabela[posicao] != null) {
+            if (tabela[posicao].getMatricula() == matricula) {
+                return tabela[posicao].getNome();
             }
+            posicao = (posicao + 1) % tabela.length;
         }
         return null;
     }
 
-    public void remove(int key){
-        int hashIndex = hash(key);
-        if (tabela[hash(key)] != null){
-            Aluno aluno = getValue(key);
-            if (aluno != null){
-                tabela[hashIndex].remove(aluno);
+    public void remove(int matricula) {
+        int posicao = hash(matricula);
+        while (tabela[posicao] != null) {
+            if (tabela[posicao].getMatricula() == matricula) {
+                tabela[posicao] = REMOVIDO;
+                size--;
+                return;
             }
-        };
+            posicao = (posicao + 1) % tabela.length;
+        }
     }
 
-    public LinkedList<Aluno>[] getTabela() {
-        return tabela;
+    private void reSize() {
+        Aluno[] tabelaAntiga = tabela;
+        tabela = new Aluno[tabelaAntiga.length * 2];
+        size = 0;
+
+        for (Aluno aluno : tabelaAntiga) {
+            if (aluno != null && aluno != REMOVIDO) {
+                insert(aluno.getMatricula(), aluno.getNome());
+            }
+        }
     }
-
-    public static void main(String[] args) {
-        TableHash table = new TableHash(5);
-
-        // Teste de Inserção
-        table.insert(123, "João");
-        table.insert(234, "Maria");
-        table.insert(345, "Pedro");
-        table.insert(456, "Ana");
-
-        // Teste de Busca
-        System.out.println(table.getValue(234));
-
-        // Teste de Remoção
-        table.remove(234);
-        System.out.println(table.getValue(234));
-
-
-    }
-
 }
