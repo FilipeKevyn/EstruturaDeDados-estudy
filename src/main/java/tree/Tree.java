@@ -9,7 +9,7 @@ public class Tree {
 
     private Node inserirRec(Node atual, int value) {
         if (atual == null) {
-            return new Node(value);
+            return new Node(value, 1);
         }
         if (value < atual.getValor()) {
             atual.setEsq(inserirRec(atual.getEsq(), value));
@@ -66,16 +66,22 @@ public class Tree {
                 ? buscarRec(atual.getEsq(), value)
                 : buscarRec(atual.getDir(), value);
     }
+
+    private void rotdir(Node node){
+
+    }
 }
 
 class Node {
     private int valor;
+    private Node pai;
     private Node esq;
-
     private Node dir;
+    private int altura;
 
-    public Node(int valor) {
+    public Node(int valor, int altura) {
         this.valor = valor;
+        this.altura = altura;
     }
 
     public int getValor() {
@@ -84,6 +90,14 @@ class Node {
 
     public void setValor(int valor) {
         this.valor = valor;
+    }
+
+    public Node getPai() {
+        return pai;
+    }
+
+    public void setPai(Node pai) {
+        this.pai = pai;
     }
 
     public Node getEsq() {
